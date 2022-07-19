@@ -1,0 +1,30 @@
+class Solution:
+    def isValid(self, s: str) -> bool:
+
+        match = {
+            '(': ')',
+            '[': ']',
+            '{': '}'
+        }
+        if (len(s) % 2) != 0:
+            return False
+
+        stack_list = []
+
+        for i in s:
+
+            if (i == '(') or (i == '[') or (i == '{'):
+                stack_list.append(i)
+            else:
+                # last in first out (LIFO) -- Stack
+                if len(stack_list) == 0:
+                    return False
+
+                ch = stack_list.pop(-1)
+                if (match[ch] != i):
+                    return False
+
+        if len(stack_list) != 0:
+            return False
+
+        return True
